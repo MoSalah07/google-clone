@@ -19,4 +19,8 @@ a {
   box-sizing: border-box;
 }
 
-
+@layer components {
+  .link {
+    @apply hover:underline transition-all;
+  }
+}
