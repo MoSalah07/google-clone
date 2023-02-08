@@ -6,7 +6,7 @@ import User from "./User";
 function Header() {
   return (
     <Container>
-      <header className="h-[10vh] capitalize">
+      <header className="h-[10vh] capitalize relative">
         <nav className="flex items-center justify-between">
           <ul className="flex items-center gap-4 basis-2/5">
             <li>
@@ -20,7 +20,7 @@ function Header() {
               </Link>
             </li>
           </ul>
-          <ul className="flex items-center basis-2/5 justify-end gap-4">
+          <ul className="flex items-center basis-2/5 justify-end gap-4 relative">
             <li>
               <Link legacyBehavior href={`/`}>
                 <a className="link text-gray-700 font-medium">gmail</a>
