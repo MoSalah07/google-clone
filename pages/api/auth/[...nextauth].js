@@ -9,10 +9,11 @@ export const authOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
     // ...add more providers here
-    ],
-    pages: {
-        signIn: '/auth/signin',
-    }
+  ],
+  pages: {
+    // signIn => KeyWord Don't Change avoid error
+    signIn: "/auth/signin",
+  },
 };
 
 export default NextAuth(authOptions);

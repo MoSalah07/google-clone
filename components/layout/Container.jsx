@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
-function Container({children}) {
+function Container({ children }) {
   return (
-      <div className=' container mx-auto px-2 md:px-4 py-4'>{children}</div>
-  )
+    <div className=" container mx-auto px-2 md:px-4 py-2 md:py-4">
+      {children}
+    </div>
+  );
 }
 
-export default Container
+export default Container;

@@ -1,11 +1,25 @@
 import Image from "next/image";
-import React from "react";
+import React, { useRef } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { BsFillMicFill } from "react-icons/bs";
+import { useRouter } from "next/router";
 
 function GoogleForm() {
+  const searchInput = useRef(null);
+  const router = useRouter();
+
+  const handelSearch = async (e) => {
+    e.preventDefault();
+    const term = searchInput.current.value;
+    if (!term.trim()) return;
+    router.push(`/search?term=${term.trim()}&searchType=`);
+  };
+
   return (
-    <form className=" flex flex-col items-center justify-center">
+    <form
+      onSubmit={handelSearch}
+      className=" flex flex-col items-center justify-center"
+    >
       <Image
         src={"/google.webp"}
         width={300}
@@ -17,6 +31,7 @@ function GoogleForm() {
       <div className=" relative w-[80%] md:w-[40%] ">
         <AiOutlineSearch className=" absolute top-[50%] left-2 translate-y-[-50%] text-lg text-gray-500" />
         <input
+          ref={searchInput}
           className=" hover:shadow-lg focus-within:shadow-lg border-2 w-full rounded-xl py-[.4rem] px-8 focus:outline-none transition-shadow"
           type="text"
         />
