@@ -20,7 +20,7 @@ function ItemSearch({
       <div className="max-w-xl mb-8 ">
         <div className="group">
           <Link href={`${link}`} legacyBehavior>
-            <a className=" text-sm truncate">{parse(htmlFormattedUrl)}</a>
+            <a className=" text-sm ">{parse(htmlFormattedUrl)}</a>
           </Link>
           <Link href={`${link}`} legacyBehavior>
             <a className=" group-hover:underline">

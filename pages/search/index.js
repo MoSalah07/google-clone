@@ -1,13 +1,16 @@
 import Head from "next/head";
-import React from "react";
+
+// Components
 import HeaderSearch from "../../components/header/HeaderSearch";
-import axios from "axios";
-import Response from "../../Response";
+import SearchResult from "../../components/search/SearchResult";
+
+// Libs
 import { useRouter } from "next/router";
-import SearchResult from '../../components/search/SearchResult'
+// Response Internal Avoid Bad Request Because Google Gave 100 Request Only
+import Response from "../../Response";
+import axios from "axios";
 
 function Search({ results }) {
-
   const router = useRouter();
   return (
     <>
@@ -25,8 +28,12 @@ function Search({ results }) {
 export default Search;
 
 export async function getServerSideProps(context) {
+  // For Pagination In ServerSide
+  // Search Work Auto From Google
+  const startIndex = context.query.start || "1";
+
   //  Here Avoid Request Any Enter Because Google Gave You 100 Request In Day
-  const mockData = true;
+  const mockData = false;
 
   const data = mockData
     ? Response
@@ -36,9 +43,9 @@ export async function getServerSideProps(context) {
             process.env.API_KEY
           }&cx=${process.env.CONTEXT_KEY}&q=${context.query.term}${
             context.query.searchType && "&searchType=image"
-          }`
+          }&start=${startIndex}`
         )
-        .then((res) => res.data);
+        .then((response) => response.data);
 
   return {
     props: { results: data },
