@@ -6,7 +6,7 @@ import Response from "../../Response";
 import { useRouter } from "next/router";
 import SearchResult from '../../components/search/SearchResult'
 
-function Search({ results, results:{searchInformation} }) {
+function Search({ results }) {
 
   const router = useRouter();
   return (
@@ -16,7 +16,7 @@ function Search({ results, results:{searchInformation} }) {
       </Head>
       <main className="min-h-[100vh]">
         <HeaderSearch />
-        <SearchResult searchInformation={searchInformation} />
+        <SearchResult results={results} />
       </main>
     </>
   );
