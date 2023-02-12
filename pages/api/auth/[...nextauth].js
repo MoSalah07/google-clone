@@ -10,6 +10,10 @@ export const authOptions = {
     }),
     // ...add more providers here
   ],
+
+  // Here Random Word Not Any Thing From Next Auth
+  secret:process.env.SECRET,
+
   pages: {
     // signIn => KeyWord Don't Change avoid error
     signIn: "/auth/signin",
