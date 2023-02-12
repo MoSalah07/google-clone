@@ -3,6 +3,7 @@ import React, { useRef } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { BsFillMicFill } from "react-icons/bs";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 function GoogleForm() {
   const searchInput = useRef(null);
@@ -13,6 +14,16 @@ function GoogleForm() {
     const term = searchInput.current.value;
     if (!term.trim()) return;
     router.push(`/search?term=${term.trim()}&searchType=`);
+  };
+
+  const handelRandomSearch = async (e) => {
+    e.preventDefault();
+    const randomTerm = await axios
+      .get(`https://random-word-api.herokuapp.com/word?number=1`)
+      .then((res) => res.data);
+
+    if (!randomTerm) return;
+    router.push(`/search?term=${randomTerm}&searchType=`);
   };
 
   return (
@@ -41,7 +52,10 @@ function GoogleForm() {
         <button className=" bg-[#f8f9fa] capitalize font-normal border-[1px] border-gray-300 block px-4 py-1 rounded-md text-gray-800 hover:ring-1 hover:ring-gray-200 transition-all focus:outline-none active:ring-gray-300 hover:shadow-md">
           google search
         </button>
-        <button className=" bg-[#f8f9fa] capitalize font-normal border-[1px] border-gray-300 block px-4 py-1 rounded-md text-gray-800 hover:ring-1 hover:ring-gray-200 transition-all focus:outline-none active:ring-gray-300 hover:shadow-md">
+        <button
+          onClick={handelRandomSearch}
+          className=" bg-[#f8f9fa] capitalize font-normal border-[1px] border-gray-300 block px-4 py-1 rounded-md text-gray-800 hover:ring-1 hover:ring-gray-200 transition-all focus:outline-none active:ring-gray-300 hover:shadow-md"
+        >
           i&apos;m feeling lucky
         </button>
       </div>
