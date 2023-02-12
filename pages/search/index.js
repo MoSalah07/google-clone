@@ -3,14 +3,21 @@ import Head from "next/head";
 // Components
 import HeaderSearch from "../../components/header/HeaderSearch";
 import SearchResult from "../../components/search/SearchResult";
+import ImageResult from "../../components/search/ImageResult";
 
 // Libs
 import { useRouter } from "next/router";
 // Response Internal Avoid Bad Request Because Google Gave 100 Request Only
 import Response from "../../Response";
+import ResponseImg from "../../ResponseImg";
 import axios from "axios";
 
+
 function Search({ results }) {
+
+
+
+
   const router = useRouter();
   return (
     <>
@@ -19,7 +26,11 @@ function Search({ results }) {
       </Head>
       <main className="min-h-[100vh]">
         <HeaderSearch />
-        <SearchResult results={results} />
+        {router.query.searchType === "image" ? (
+          <ImageResult results={results} />
+        ) : (
+          <SearchResult results={results} />
+        )}
       </main>
     </>
   );
@@ -35,8 +46,12 @@ export async function getServerSideProps(context) {
   //  Here Avoid Request Any Enter Because Google Gave You 100 Request In Day
   const mockData = false;
 
+  //  Here For Change Between Search All And Search Image From DummyData
+  const dummyResponse =
+    context.query.searchType === "image" ? ResponseImg : Response;
+
   const data = mockData
-    ? Response
+    ? dummyResponse
     : await axios
         .get(
           `https://www.googleapis.com/customsearch/v1?key=${

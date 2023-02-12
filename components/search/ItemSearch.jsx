@@ -14,7 +14,7 @@ function ItemSearch({
   },
   result,
 }) {
-  //   console.log(htmlFormattedUrl);
+    // console.log(result);
   return (
     <>
       <div className="max-w-xl mb-8 ">
